@@ -14,6 +14,7 @@ function MainStackNavigator() {
         mode="modal"
         headerShown="false"
         screenOptions={{
+          header: () => null,
           cardStyle: { backgroundColor: "transparent" },
           cardOverlayEnabled: true,
           cardStyleInterpolator: ({ current: { progress } }) => ({
