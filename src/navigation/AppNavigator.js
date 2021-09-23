@@ -11,7 +11,7 @@ function MainStackNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        mode="modal"
+        presentation="modal"
         headerShown="false"
         screenOptions={{
           header: () => null,

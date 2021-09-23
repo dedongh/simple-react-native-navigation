@@ -1,18 +1,65 @@
-import React from "react";
-import { StyleSheet, StatusBar, View, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  StatusBar,
+  View,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import Header from "../components/Header";
+import { useSelector } from "react-redux";
 
 export default function ListScreen({ navigation }) {
   return (
-    <View style={styles.container}>
-      <View style={styles.fabContainer}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Modal")}
-          style={styles.fabButton}
-        >
-          <Ionicons name="ios-add" color="#fff" size={70} />
-        </TouchableOpacity>
+    <>
+      <StatusBar barStyle="light-content" />
+      <View style={styles.container}>
+        <Header title={"List"} />
+        <ListView />
+        <View style={styles.fabContainer}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Modal")}
+            style={styles.fabButton}
+          >
+            <Ionicons name="ios-add" color="#fff" size={70} />
+          </TouchableOpacity>
+        </View>
       </View>
+    </>
+  );
+}
+function ListView() {
+  const listItems = useSelector((state) => state.itemList);
+  return (
+    <View
+      style={{
+        backgroundColor: "white",
+        flex: 1,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        paddingHorizontal: 20,
+        paddingVertical: 20,
+      }}
+    >
+      {listItems.length !== 0 ? (
+        <FlatList
+          data={listItems}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <View style={styles.listItemContainer}>
+              <View style={styles.listItemMetaContainer}>
+                <Text style={styles.itemTitle} numberOfLines={1}>
+                  {item.name}
+                </Text>
+              </View>
+            </View>
+          )}
+        />
+      ) : (
+        <Text style={{ fontSize: 30 }}>Your list is empty :'(</Text>
+      )}
     </View>
   );
 }
