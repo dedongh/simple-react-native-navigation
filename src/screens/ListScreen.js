@@ -53,6 +53,12 @@ function ListView() {
                 <Text style={styles.itemTitle} numberOfLines={1}>
                   {item.name}
                 </Text>
+                <TouchableOpacity
+                  onPress={() => dispatch(removeItem(item.id))}
+                  style={styles.button}
+                >
+                  <Ionicons name="ios-trash" color="#fff" size={20} />
+                </TouchableOpacity>
               </View>
             </View>
           )}
@@ -83,5 +89,24 @@ const styles = StyleSheet.create({
     height: 70,
     alignItems: "center",
     justifyContent: "center",
+  },
+  listItemContainer: {
+    flex: 1,
+    flexDirection: "row",
+    paddingTop: 10,
+    paddingBottom: 5,
+    paddingRight: 5,
+    justifyContent: "space-between",
+    width: "100%",
+    borderBottomWidth: 0.25,
+  },
+  itemTitle: {
+    fontSize: 22,
+    fontWeight: "400",
+  },
+  button: {
+    borderRadius: 8,
+    backgroundColor: "#ff333390",
+    padding: 5,
   },
 });
